@@ -21,10 +21,13 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  brand : {
+    type: String,
+  },
   quantity : {
     type: Number,
   }
-});
+}); 
 
 const ProductModel = mongoose.model("Product", productSchema);
 
