@@ -40,7 +40,7 @@ export const createProduct = async (req, res) => {
 
 export const getAllProducts = async (req, res) => {
   try {
-    const product = await Product.find().populate("category");
+    const product = await Product.find()
     if (Product) {
       res.status(200).json(product);
     }
