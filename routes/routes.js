@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { createProduct, getAllProducts, getSingleProduct , updateSingleProduct, deleteProduct, getProductQuantity , getProductsByBrand } from "../cotroller/productController.js";
-import { registerUser , login, getAllUsers  , getSingleUser, updateSingleUser , deleteUser } from '../cotroller/userController.js';
+import { registerUser , login, updatePassword, getAllUsers  , getSingleUser, updateSingleUser , deleteUser } from '../cotroller/userController.js';
 
 
 // user routes
@@ -13,6 +13,7 @@ router.get("/user/allusers", getAllUsers)
 router.get('/user/:id', getSingleUser);
 router.put("/user/:id" , updateSingleUser);
 router.delete("/product/:id" , deleteUser);
+router.post("/user/updatepassword", updatePassword)
 
 
 

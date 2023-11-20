@@ -61,6 +61,44 @@ export const login = async(req, res) => {
 }
 
 
+
+
+// reset password
+// update password
+export const updatePassword = async (req, res) => {
+    try {
+        const { oldPassword, newPassword, confirmNewPassword } = req.body;
+        const { userId } = req.user;
+        const user = await User.findById(userId);
+
+        const passwordValid = await bcrypt.compare(oldPassword, user.password);
+
+        if (!user) {
+            return res.status(404).send({ message: "User doesn't exist" });
+        }
+
+        if (!passwordValid) {
+            return res.status(400).send({ message: "Please type the correct password" });
+        }
+
+        if (newPassword !== confirmNewPassword) {
+            return res.status(400).send({ message: "Please make sure both new passwords and confirmed passwords are the same" });
+        }
+
+        user.password = await bcrypt.hash(newPassword, 10);
+        await user.save();
+
+        res.status(200).send({ message: "Password reset successfully" });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}
+
+
+
+
+
+
 //get all Users
 export const getAllUsers = async (req, res) => {
     try {
